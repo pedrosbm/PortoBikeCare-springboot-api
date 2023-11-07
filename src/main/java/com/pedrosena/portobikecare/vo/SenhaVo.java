@@ -11,7 +11,7 @@ public class SenhaVo {
 	}
 	
 	public SenhaVo() {
-//		,@JsonProperty("cliente_id")  int clienteId
+//		@JsonProperty("cliente_id")  int clienteId
 	}
 	
 	public String getSenha() {

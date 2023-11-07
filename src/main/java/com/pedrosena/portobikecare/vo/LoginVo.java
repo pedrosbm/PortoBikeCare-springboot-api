@@ -8,7 +8,7 @@ public class LoginVo {
 	private String senha;
 	
 	@JsonCreator
-	public LoginVo(@JsonProperty("email")String email, @JsonProperty("senha")String senha) {
+	public LoginVo(@JsonProperty("email")String email, @JsonProperty("pwd")String senha) {
 		this.email = email;
 		this.senha = senha;
 	}

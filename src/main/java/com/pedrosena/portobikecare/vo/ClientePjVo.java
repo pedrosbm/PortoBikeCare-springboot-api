@@ -2,6 +2,7 @@ package com.pedrosena.portobikecare.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pedrosena.portobikecare.bo.DateConv;
 
@@ -20,6 +21,8 @@ public class ClientePjVo extends ClienteVo{
 	 * @param cnpj - String
 	 * @param dataFund - String
 	 */
+	
+	@JsonCreator
 	public ClientePjVo(@JsonProperty("nome") String nome, @JsonProperty("cep") String cep,@JsonProperty("email")  String email, @JsonProperty("cpfcnpj") String cnpj,@JsonProperty("nasc")  String dataFund, @JsonProperty("pwd")String senha) {
 		super(nome, cep, email, new SenhaVo(senha));
 		this.cnpj = cnpj;
@@ -31,6 +34,13 @@ public class ClientePjVo extends ClienteVo{
 		this.cnpj = cnpj;
 		this.dataFund = dataFund;
 	}
+	
+	public ClientePjVo(int id, String nome, String cep, String email, String cnpj, Date dataFund, SenhaVo senha) {
+		super(id, nome, cep, email);
+		this.cnpj = cnpj;
+		this.dataFund = dataFund;
+	}
+	
 	
 	/**
 	 * Construtor vazio padrão de ClientePjVo, que herda de ClienteVo.

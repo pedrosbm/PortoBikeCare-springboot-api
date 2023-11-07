@@ -28,6 +28,15 @@ public class ClienteVo {
 		this.email = email;
 	}
 	
+	public ClienteVo(int id,String nome, String cep, String email, SenhaVo senha) {
+		this.id = id;
+		this.nome = nome;
+		this.cep = cep;
+		this.email = email;
+		this.senha = senha;
+		senha.setClienteId(id);
+	}
+	
 	public ClienteVo() {
 		
 	}

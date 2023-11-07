@@ -132,6 +132,44 @@ public class ClientePfDao {
 
 	    return cliente;
 	}
+	
+	public ClientePfVo selectByEmail(String email) {
+		String sqlStatement = "select * from clientepf where email = ?";
+		
+		ClientePfVo cliente = new ClientePfVo();
+		
+		try {
+			PreparedStatement statement = conn.prepareStatement(sqlStatement);			
+			statement.setString(1, email);
+			ResultSet clienteData = statement.executeQuery();
+
+			if(clienteData.next()) {
+				int clienteId = clienteData.getInt("ID");
+		        String nome = clienteData.getString("NOME");
+		        String cep = clienteData.getString("CEP");
+		        String clienteEmail = clienteData.getString("EMAIL");
+		        String cpf = clienteData.getString("CPF");
+		        Date dataNasc = clienteData.getDate("DATANASC");
+		        
+		        cliente.setId(clienteId);
+		        cliente.setNome(nome);
+		        cliente.setCep(cep);
+		        cliente.setEmail(clienteEmail);
+		        cliente.setCpf(cpf);
+		        cliente.setDataNasc(dataNasc);
+			} else	{
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("Algo deu errado");
+			e.printStackTrace();
+			DatabaseConnection.closeConnection();
+		}
+		
+		return cliente;
+
+	}
 
 	public String update(ClientePfVo c) {
 	    String sqlStatement = "UPDATE cliente SET NOME = ?, CEP = ?, EMAIL = ? WHERE ID = ?";
