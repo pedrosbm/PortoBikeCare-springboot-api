@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.pedrosena.portobikecare.vo.ClienteVo;
+
 public class ClienteDao {
 	private Connection conn = DatabaseConnection.getConnection();
 	
@@ -28,5 +30,34 @@ public class ClienteDao {
 		}
 		
 		return id;
+	}
+	
+	public ClienteVo selectByEmail(String email) {
+		String sqlStatement = "select * from cliente where email = ?";
+		ClienteVo c = new ClienteVo();
+		
+		try {
+			PreparedStatement statement = conn.prepareStatement(sqlStatement);
+			statement.setString(1, email);
+			ResultSet clienteData = statement.executeQuery();
+			
+			if(clienteData.next()) {
+				int id = clienteData.getInt("ID");
+	            String nome = clienteData.getString("NOME");
+	            String cep = clienteData.getString("CEP");
+	            String cEmail = clienteData.getString("EMAIL");
+				
+	            c.setId(id);
+		        c.setNome(nome);
+		        c.setCep(cep);
+		        c.setEmail(cEmail);	
+			}
+		} catch (SQLException e) {
+			System.err.println("Algo deu errado");
+			e.printStackTrace();
+			DatabaseConnection.closeConnection();
+		}
+		
+		return c;
 	}
 }

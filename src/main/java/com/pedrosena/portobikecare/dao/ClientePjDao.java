@@ -133,43 +133,6 @@ public class ClientePjDao {
 	    return cliente;
 	}
 
-	public ClientePjVo selectByEmail(String email) {
-		String sqlStatement = "select * from clientepj where email = ?";
-		
-		ClientePjVo cliente = new ClientePjVo();
-		
-		try {
-			PreparedStatement statement = conn.prepareStatement(sqlStatement);			
-			statement.setString(1, email);
-			ResultSet clienteData = statement.executeQuery();
-
-			if(clienteData.next()) {
-				int clienteId = clienteData.getInt("ID");
-		        String nome = clienteData.getString("NOME");
-		        String cep = clienteData.getString("CEP");
-		        String clienteEmail = clienteData.getString("EMAIL");
-		        String cpf = clienteData.getString("CNPJ");
-		        Date dataNasc = clienteData.getDate("DATAFUND");
-		        
-		        cliente.setId(clienteId);
-		        cliente.setNome(nome);
-		        cliente.setCep(cep);
-		        cliente.setEmail(clienteEmail);
-		        cliente.setCnpj(cpf);
-		        cliente.setDataFund(dataNasc);
-			}	else	{
-				return null;
-			}
-			
-		} catch (SQLException e) {
-			System.err.println("Algo deu errado");
-			e.printStackTrace();
-			DatabaseConnection.closeConnection();
-		}
-		
-		return cliente;
-	}
-	
 	public String update(ClientePjVo c) {
 	    String sqlStatement = "UPDATE cliente SET NOME = ?, CEP = ?, EMAIL = ? WHERE ID = ?";
 	    String sqlStatement2 = "UPDATE clientepj SET CNPJ = ?, DATAFUND = ? WHERE CLIENTE_ID = ?";
