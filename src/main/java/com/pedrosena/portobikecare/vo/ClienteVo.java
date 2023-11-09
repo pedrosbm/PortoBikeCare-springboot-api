@@ -13,7 +13,7 @@ public class ClienteVo {
 	private SenhaVo senha;
 	
 	public ClienteVo(String nome, String cep, String email, SenhaVo senha) {
-		this.id = IdGen.newId();
+		this.id = IdGen.clienteNewId();
 		this.nome = nome;
 		this.cep = cep;
 		this.email = email;

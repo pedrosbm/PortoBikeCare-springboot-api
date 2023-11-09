@@ -100,6 +100,44 @@ public class BikeDao {
 	    }
 	    return bikes;
 	}
+	
+	public List<BikeVo> selectByUser(int id) {
+	    List<BikeVo> bikes = new ArrayList<>();
+
+	    String sqlStatement = "SELECT * FROM bike where cliente_id = ?";
+
+	    try {
+	        PreparedStatement statement = conn.prepareStatement(sqlStatement);
+	        statement.setInt(1, id);
+	        ResultSet bikeData = statement.executeQuery();
+
+	        while (bikeData.next()) {
+	            int bikeId = bikeData.getInt("ID");
+	            String nick = bikeData.getString("NICK");
+	            String tipoQuadro = bikeData.getString("TIPOQUADRO");
+	            int quantMarcha = bikeData.getInt("QUANTMARCHA");
+	            String tipoSuspensao = bikeData.getString("TIPOSUSPENSAO");
+	            String tipoFreio = bikeData.getString("TIPOFREIO");
+	            String modalidade = bikeData.getString("MODALIDADE");
+	            String marca = bikeData.getString("MARCA");
+	            String modelo = bikeData.getString("MODELO");
+	            double valor = bikeData.getDouble("VALOR");
+	            String numSerie = bikeData.getString("NUMSERIE");
+	            String acessorio = bikeData.getString("ACESSORIO");
+	            String tipoPneu = bikeData.getString("TIPOPNEU");
+	            String observacoes = bikeData.getString("OBSERVACOES");
+	            long nf = bikeData.getLong("NF");
+	            int clienteId = bikeData.getInt("CLIENTE_ID");
+
+	            bikes.add(new BikeVo(bikeId, nick, tipoQuadro, quantMarcha, tipoSuspensao, tipoFreio, modalidade, marca, modelo, valor, numSerie, acessorio, tipoPneu, observacoes, nf, clienteId));
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Algo deu errado");
+	        DatabaseConnection.closeConnection();
+	        e.printStackTrace();
+	    }
+	    return bikes;
+	}
 
 	public BikeVo selectById(int id) {
 	    String sqlStatement = "SELECT * FROM bike WHERE ID = ?";
@@ -152,7 +190,28 @@ public class BikeDao {
 	    }
 	    return bike;
 	}
-
+	
+	public int selectLast() {
+		String sqlStatement = "select id from bike order by id desc";
+		int id;
+		
+		try {
+			PreparedStatement statement = conn.prepareStatement(sqlStatement);
+			ResultSet idData = statement.executeQuery();
+			
+			idData.next();
+			
+			id = idData.getInt("id");
+			
+		} catch (SQLException e) {
+			System.err.println("Algo deu errado");
+			DatabaseConnection.closeConnection();
+			e.printStackTrace();
+			id = 0;
+		}
+		
+		return id;
+	}
 	
 	public String update(BikeVo b) {
 		String sqlStatement = "update bike set nick = ?, tipoquadro = ?, quantmarcha = ?, tiposuspensao = ?, tipofreio = ?, modalidade = ?, marca = ?, modelo = ?, valor = ?, numserie = ?, acessorio = ?, acessorio = ?, tipopneu = ?, obervacoes = ?, nf = ?, cliente_id = ? where bike_id = ?";
