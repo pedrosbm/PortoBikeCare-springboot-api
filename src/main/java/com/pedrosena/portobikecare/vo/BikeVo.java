@@ -16,14 +16,13 @@ public class BikeVo {
 	private String modelo;
 	private double valor;
 	private String numSerie;
-	private String acessorio;
 	private String tipoPneu;
 	private String observacoes;
 	private long nf;
 	private int cliente_id;
 	
 	@JsonCreator
-	public BikeVo(@JsonProperty("nick") String nick,@JsonProperty("tipoQuadro") String tipoQuadro,@JsonProperty("quantMarcha") int quantMarcha,@JsonProperty("tipoSuspensao") String tipoSuspensao,@JsonProperty("tipoFreio") String tipoFreio,@JsonProperty("modalidade") String modalidade,@JsonProperty("marca") String marca,@JsonProperty("modelo") String modelo,@JsonProperty("valor") double valor,@JsonProperty("numserie") String numSerie,@JsonProperty("acessorio") String acessorio,@JsonProperty("tipoPneu") String tipoPneu,@JsonProperty("observações") String observacoes,@JsonProperty("nf") long nf,@JsonProperty("nf") int cliente_id) {
+	public BikeVo(@JsonProperty("nick") String nick,@JsonProperty("tipoQuadro") String tipoQuadro,@JsonProperty("quantMarcha") int quantMarcha,@JsonProperty("tipoSuspensao") String tipoSuspensao,@JsonProperty("tipoFreio") String tipoFreio,@JsonProperty("modalidade") String modalidade,@JsonProperty("marca") String marca,@JsonProperty("modelo") String modelo,@JsonProperty("valor") double valor,@JsonProperty("numserie") String numSerie,@JsonProperty("tipoPneu") String tipoPneu,@JsonProperty("observacoes") String observacoes,@JsonProperty("nf") long nf,@JsonProperty("clienteId") int cliente_id) {
 		this.id = IdGen.bikeNewId();
 		this.nick = nick;
 		this.tipoQuadro = tipoQuadro;
@@ -35,14 +34,13 @@ public class BikeVo {
 		this.modelo = modelo;
 		this.valor = valor;
 		this.numSerie = numSerie;
-		this.acessorio = acessorio;
 		this.tipoPneu = tipoPneu;
 		this.observacoes = observacoes;
 		this.nf = nf;
 		this.cliente_id = cliente_id;
 	}
 
-	public BikeVo(int id, String nick, String tipoQuadro, int quantMarcha, String tipoSuspensao, String tipoFreio, String modalidade, String marca, String modelo, double valor, String numSerie, String acessorio, String tipoPneu, String observacoes, long nf, int cliente_id) {
+	public BikeVo(int id, String nick, String tipoQuadro, int quantMarcha, String tipoSuspensao, String tipoFreio, String modalidade, String marca, String modelo, double valor, String numSerie, String tipoPneu, String observacoes, long nf, int cliente_id) {
 		this.id = id;
 		this.nick = nick;
 		this.tipoQuadro = tipoQuadro;
@@ -54,7 +52,6 @@ public class BikeVo {
 		this.modelo = modelo;
 		this.valor = valor;
 		this.numSerie = numSerie;
-		this.acessorio = acessorio;
 		this.tipoPneu = tipoPneu;
 		this.observacoes = observacoes;
 		this.nf = nf;
@@ -135,14 +132,6 @@ public class BikeVo {
 
 	public void setNumSerie(String numSerie) {
 		this.numSerie = numSerie;
-	}
-
-	public String getAcessorio() {
-		return acessorio;
-	}
-
-	public void setAcessorio(String acessorio) {
-		this.acessorio = acessorio;
 	}
 
 	public String getTipoPneu() {
