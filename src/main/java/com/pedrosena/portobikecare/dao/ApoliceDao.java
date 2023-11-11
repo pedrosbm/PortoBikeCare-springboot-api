@@ -110,7 +110,28 @@ public class ApoliceDao {
 		    }
 		    return apolice;
 		}
-
+		
+		public int selectLast() {
+			String sqlStatement = "select id from apolice order by id desc";
+			int id;
+			
+			try {
+				PreparedStatement statement = conn.prepareStatement(sqlStatement);
+				ResultSet idData = statement.executeQuery();
+				
+				idData.next();
+				
+				id = idData.getInt("id");
+				
+			} catch (SQLException e) {
+				System.err.println("Algo deu errado");
+				DatabaseConnection.closeConnection();
+				e.printStackTrace();
+				id = 0;
+			}
+			return id;
+		}
+	    
 		public String update(ApoliceVo apolice) {
 		    String sqlStatement = "UPDATE apolice SET TITULAR = ?, INFOBIKE = ?, VALORASSEGURADO = ?, DATAINICIO = ?, DATAFIM = ?, CLIENTE_ID = ? WHERE ID = ?";
 

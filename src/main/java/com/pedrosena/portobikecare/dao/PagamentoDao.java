@@ -97,6 +97,25 @@ public class PagamentoDao {
         return pagamento;
     }
     
+    public int selectLast() {
+        String sqlStatement = "select id from pagamento order by id desc";
+        int id = 0;
+        
+        try {
+            PreparedStatement statement = conn.prepareStatement(sqlStatement);
+            ResultSet pagamentoData = statement.executeQuery();
+            
+            if(pagamentoData.next()) {
+            	id = pagamentoData.getInt("ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro.");
+            DatabaseConnection.closeConnection();
+            e.printStackTrace();
+        }
+        return id;
+    }
+    
     public String update(PagamentoVo pagamento) {
         String sqlStatement = "UPDATE pagamento SET VALOR = ?, PARCELAS = ? WHERE ID = ?";
 

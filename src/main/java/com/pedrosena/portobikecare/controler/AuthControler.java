@@ -30,18 +30,22 @@ public class AuthControler {
 		ClienteVo c = cDao.selectByEmail(login.getEmail());
 		SenhaVo s = sDao.selectById(c.getId());
 		
-		if(s.getSenha().equals(login.getSenha())) {
+		try {
+			if(s.getSenha().equals(login.getSenha())) {
 
-			ClientePfVo cPf = pfDao.selectById(c.getId());
-			ClientePjVo cPj = pjDao.selectById(c.getId());
+				ClientePfVo cPf = pfDao.selectById(c.getId());
+				ClientePjVo cPj = pjDao.selectById(c.getId());
 
-			if(cPf.getId() == 0){
-				return ResponseEntity.ok(cPj);
-			} else {
-				return ResponseEntity.ok(cPf);
+				if(cPf.getId() == 0){
+					return ResponseEntity.ok(cPj);
+				} else {
+					return ResponseEntity.ok(cPf);
+				}
+				
+			}else {
+				return ResponseEntity.ok(new ClienteVo());
 			}
-			
-		}else {
+		} catch (Exception e) {
 			return ResponseEntity.ok(new ClienteVo());
 		}
 	}

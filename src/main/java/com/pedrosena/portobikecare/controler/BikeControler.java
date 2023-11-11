@@ -31,4 +31,11 @@ public class BikeControler {
 		
 		return ResponseEntity.ok(list);
 	}
+	
+	@GetMapping(path = "/listAll")
+	public ResponseEntity<List<BikeVo>> listarTodas(){
+		List<BikeVo> list = bikeDao.selectAll();
+		
+		return ResponseEntity.ok(list);
+	}
 }

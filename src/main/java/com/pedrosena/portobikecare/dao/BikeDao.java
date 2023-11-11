@@ -126,7 +126,7 @@ public class BikeDao {
 	            String observacoes = bikeData.getString("OBSERVACOES");
 	            long nf = bikeData.getLong("NF");
 	            int clienteId = bikeData.getInt("CLIENTE_ID");
-
+	            
 	            bikes.add(new BikeVo(bikeId, nick, tipoQuadro, quantMarcha, tipoSuspensao, tipoFreio, modalidade, marca, modelo, valor, numSerie, tipoPneu, observacoes, nf, clienteId));
 	        }
 	    } catch (SQLException e) {

@@ -1,28 +1,57 @@
-package com.pedrosena.portobikecare.vo;
+	package com.pedrosena.portobikecare.vo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pedrosena.portobikecare.bo.IdGen;
 
 public class BikeVo {
+	@JsonProperty("id")
 	private int id;
-	private String nick;
-	private String tipoQuadro;
-	private int quantMarcha;
-	private String tipoSuspensao;
-	private String tipoFreio;
-	private String modalidade;
-	private String marca;
-	private String modelo;
-	private double valor;
-	private String numSerie;
-	private String tipoPneu;
-	private String observacoes;
-	private long nf;
-	private int cliente_id;
 	
+	@JsonProperty("nick")
+	private String nick;
+
+	@JsonProperty("tipoQuadro")
+	private String tipoQuadro;
+	
+	@JsonProperty("quantMarcha")
+	private int quantMarcha;
+
+	@JsonProperty("tipoSuspensao")
+	private String tipoSuspensao;
+	
+	@JsonProperty("tipoFreio")
+	private String tipoFreio;
+	
+	@JsonProperty("modalidade")
+	private String modalidade;
+	
+	@JsonProperty("marca")
+	private String marca;
+	
+	@JsonProperty("modelo")
+	private String modelo;
+	
+	@JsonProperty("valor")
+	private double valor;
+	
+	@JsonProperty("numSerie")
+	private String numSerie;
+	
+	@JsonProperty("tipoPneu")
+	private String tipoPneu;
+	
+	@JsonProperty("observacoes")
+	private String observacoes;
+	
+	@JsonProperty("nf")
+	private long nf;
+	
+	@JsonProperty("clienteId")
+	private int cliente_id;
+
 	@JsonCreator
-	public BikeVo(@JsonProperty("nick") String nick,@JsonProperty("tipoQuadro") String tipoQuadro,@JsonProperty("quantMarcha") int quantMarcha,@JsonProperty("tipoSuspensao") String tipoSuspensao,@JsonProperty("tipoFreio") String tipoFreio,@JsonProperty("modalidade") String modalidade,@JsonProperty("marca") String marca,@JsonProperty("modelo") String modelo,@JsonProperty("valor") double valor,@JsonProperty("numserie") String numSerie,@JsonProperty("tipoPneu") String tipoPneu,@JsonProperty("observacoes") String observacoes,@JsonProperty("nf") long nf,@JsonProperty("clienteId") int cliente_id) {
+	public BikeVo(@JsonProperty("nick") String nick,@JsonProperty("tipoQuadro") String tipoQuadro,@JsonProperty("quantMarcha") int quantMarcha,@JsonProperty("tipoSuspensao") String tipoSuspensao,@JsonProperty("tipoFreio") String tipoFreio,@JsonProperty("modalidade") String modalidade,@JsonProperty("marca") String marca,@JsonProperty("modelo") String modelo,@JsonProperty("valor") double valor,@JsonProperty("numSerie") String numSerie,@JsonProperty("tipoPneu") String tipoPneu,@JsonProperty("observacoes") String observacoes,@JsonProperty("nf") long nf,@JsonProperty("clienteId") int cliente_id) {
 		this.id = IdGen.bikeNewId();
 		this.nick = nick;
 		this.tipoQuadro = tipoQuadro;

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pedrosena.portobikecare.vo.PlanoVo;
 
@@ -101,6 +102,52 @@ public class PlanoDao {
         return plano;
     }
     
+    public List<PlanoVo> selectByCliente(int id) {
+        ArrayList<PlanoVo> planos = new ArrayList<>();
+
+        String sqlStatement = "SELECT * FROM plano where cliente_id = ?";
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(sqlStatement);
+            statement.setInt(1, id);
+            ResultSet planoData = statement.executeQuery();
+
+            while (planoData.next()) {
+                int planoId = planoData.getInt("ID");
+                String nome = planoData.getString("NOME");
+                double valor = planoData.getDouble("VALOR");
+                String cobertura = planoData.getString("COBERTURA");
+                int apoliceId = planoData.getInt("APOLICE_ID");
+
+                planos.add(new PlanoVo(planoId , nome, valor, cobertura, apoliceId));
+            }
+        } catch (SQLException e) {
+            System.err.println("Algo deu errado");
+            DatabaseConnection.closeConnection();
+            e.printStackTrace();
+        }
+        return planos;
+    }
+    
+    public int selectLast() {
+        String sqlStatement = "SELECT id FROM plano order by id desc";
+        int id = 0;
+        
+        try {
+            PreparedStatement statement = conn.prepareStatement(sqlStatement);
+            ResultSet planoData = statement.executeQuery();
+            
+            planoData.next();
+
+            id = planoData.getInt("ID");
+        	
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro.");
+            DatabaseConnection.closeConnection();
+            e.printStackTrace();
+        }
+        return id;
+    }
     public String update(PlanoVo plano) {
         String sqlStatement = "UPDATE plano SET NOME = ?, VALOR = ?, COBERTURA = ?, APOLICE_ID = ? WHERE ID = ?";
 

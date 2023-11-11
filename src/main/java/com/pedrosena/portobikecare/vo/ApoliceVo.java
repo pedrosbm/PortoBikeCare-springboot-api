@@ -2,15 +2,45 @@ package com.pedrosena.portobikecare.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pedrosena.portobikecare.bo.IdGen;
+
 public class ApoliceVo {
+	
+	@JsonProperty("apoliceId")
 	private int id;
+	
+	@JsonProperty("titular")
 	private String titular;
+
+	@JsonProperty("infoBike")
 	private String infoBike;
+
+	@JsonProperty("valorAssegurado")
 	private double valorAssegurado;
+
+	@JsonProperty("dataInicio")
 	private Date dataInicio;
+
+	@JsonProperty("dataFim")
 	private Date dataFim;
+
+	@JsonProperty("clienteId")
 	private int cliente_id;
 
+	@JsonCreator
+	@SuppressWarnings("deprecation")
+	public ApoliceVo(@JsonProperty("titular") String titular, @JsonProperty("infoBike") String infoBike, @JsonProperty("valorAssegurado") double valorAssegurado,@JsonProperty("dataInicio") Date dataInicio,@JsonProperty("clienteId") int cliente_id) {
+		this.id = IdGen.apoliceNewId();
+		this.titular = titular;
+		this.infoBike = infoBike;
+		this.valorAssegurado = valorAssegurado;
+		this.dataInicio = dataInicio;
+		this.dataFim = new Date((int) (getDataInicio().getYear() - 1.899), getDataInicio().getMonth() -1, getDataInicio().getDate());
+		this.cliente_id = cliente_id;
+	}
+	
 	public ApoliceVo(int id, String titular, String infoBike, double valorAssegurado, Date dataInicio, Date dataFim, int cliente_id) {
 		this.id = id;
 		this.titular = titular;
