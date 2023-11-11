@@ -26,9 +26,9 @@ public class CartaoControler {
 	}
 	
 	@PostMapping(path = "/new")
-	public ResponseEntity<String> novoCartao(@RequestBody CartaoVo cartao){
+	public ResponseEntity<CartaoVo> novoCartao(@RequestBody CartaoVo cartao){
 		cDao.insert(cartao);
 		
-		return ResponseEntity.ok("Cartão cadastrado");
+		return ResponseEntity.ok(cartao);
 	}
 }

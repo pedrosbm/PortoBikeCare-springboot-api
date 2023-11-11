@@ -1,24 +1,34 @@
 package com.pedrosena.portobikecare.vo;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pedrosena.portobikecare.bo.IdGen;
 
 public class PlanoVo {
 	
-	@JsonProperty()
+	@JsonProperty("planoId")
 	private int id;
+
+	@JsonProperty("nomePlano")
 	private String nome;
+
+	@JsonProperty("valor")
 	private double valor;
+	
+	@JsonProperty("cobertura")
 	private String cobertura;
+
+	@JsonProperty("apoliceId")
 	private int apoliceId;
 	
 	@JsonCreator
-	public PlanoVo(@JsonProperty String nome, double valor, String cobertura, int apoliceId) {
+	public PlanoVo(@JsonProperty("nomePlano") String nome,@JsonProperty("valor") double valor,@JsonProperty("cobertura") List<String> cobertura, int apoliceId) {
 		this.id = IdGen.planoNewId();
 		this.nome = nome;
 		this.valor = valor;
-		this.cobertura = cobertura;
+		this.cobertura = String.join(", ", cobertura);
 		this.apoliceId = apoliceId;
 	}
 	

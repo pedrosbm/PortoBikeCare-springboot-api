@@ -19,10 +19,10 @@ public class PlanoControler {
 	private PlanoDao pDao = new PlanoDao();
 
 	@PostMapping(path = "/new")
-	public ResponseEntity<String> novoPlano(@RequestBody PlanoVo plano){
+	public ResponseEntity<PlanoVo> novoPlano(@RequestBody PlanoVo plano){
 		pDao.insert(plano);
 		
-		return ResponseEntity.ok("Plano criado");
+		return ResponseEntity.ok(plano);
 	}
 	
 	@GetMapping(path = "/list/{id}")

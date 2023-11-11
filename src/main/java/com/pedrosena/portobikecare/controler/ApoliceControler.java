@@ -15,9 +15,9 @@ public class ApoliceControler {
 	private ApoliceDao aDao = new ApoliceDao();
 	
 	@PostMapping(path = "/new")
-	public ResponseEntity<String> novoApolice(@RequestBody ApoliceVo apolice){
+	public ResponseEntity<ApoliceVo> novoApolice(@RequestBody ApoliceVo apolice){
 		aDao.insert(apolice);
 		
-		return ResponseEntity.ok("Apolice novo");
+		return ResponseEntity.ok(apolice);
 	}
 }

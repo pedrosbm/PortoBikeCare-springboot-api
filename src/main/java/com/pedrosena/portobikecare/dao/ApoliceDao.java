@@ -119,9 +119,11 @@ public class ApoliceDao {
 				PreparedStatement statement = conn.prepareStatement(sqlStatement);
 				ResultSet idData = statement.executeQuery();
 				
-				idData.next();
-				
-				id = idData.getInt("id");
+				if(idData.next()) {
+					id = idData.getInt("id");
+				} else {
+					id = 0;
+				}
 				
 			} catch (SQLException e) {
 				System.err.println("Algo deu errado");

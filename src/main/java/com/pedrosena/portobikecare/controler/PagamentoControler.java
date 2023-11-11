@@ -15,10 +15,10 @@ public class PagamentoControler {
 	private PagamentoDao pdao = new PagamentoDao();
 	
 	@PostMapping(path = "/new")
-	public ResponseEntity<String> novoPagamento(@RequestBody PagamentoVo pagamento){
+	public ResponseEntity<PagamentoVo> novoPagamento(@RequestBody PagamentoVo pagamento){
 		pdao.insert(pagamento);
 		
-		return ResponseEntity.ok("pagamento criado");
+		return ResponseEntity.ok(pagamento);
 	}
 	
 }

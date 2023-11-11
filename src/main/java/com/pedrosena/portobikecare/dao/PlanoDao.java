@@ -137,9 +137,9 @@ public class PlanoDao {
             PreparedStatement statement = conn.prepareStatement(sqlStatement);
             ResultSet planoData = statement.executeQuery();
             
-            planoData.next();
-
-            id = planoData.getInt("ID");
+            if(planoData.next()) {
+            	id = planoData.getInt("ID");
+            }
         	
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro.");

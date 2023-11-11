@@ -12,14 +12,14 @@ public class PagamentoVo {
 	@JsonProperty("valor")
 	private double valor;
 
-	@JsonProperty("parcelas")
+	@JsonProperty("quantParcelas")
 	private int parcelas;
 
 	@JsonProperty("clienteId")
 	private int clienteId;
 
 	@JsonCreator
-	public PagamentoVo(@JsonProperty("valor")double valor,@JsonProperty("parcelas") int parcelas,@JsonProperty("clienteId") int clienteId) {
+	public PagamentoVo(@JsonProperty("valor")double valor,@JsonProperty("quantParcelas") int parcelas,@JsonProperty("clienteId") int clienteId) {
 		this.id = IdGen.pagamentoNewId();
 		this.valor = valor;
 		this.parcelas = parcelas;

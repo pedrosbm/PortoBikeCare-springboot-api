@@ -31,13 +31,13 @@ public class ApoliceVo {
 
 	@JsonCreator
 	@SuppressWarnings("deprecation")
-	public ApoliceVo(@JsonProperty("titular") String titular, @JsonProperty("infoBike") String infoBike, @JsonProperty("valorAssegurado") double valorAssegurado,@JsonProperty("dataInicio") Date dataInicio,@JsonProperty("clienteId") int cliente_id) {
+	public ApoliceVo(@JsonProperty("titular") String titular, @JsonProperty("infoBike") String infoBike, @JsonProperty("valorAssegurado") double valorAssegurado,@JsonProperty("clienteId") int cliente_id) {
 		this.id = IdGen.apoliceNewId();
 		this.titular = titular;
 		this.infoBike = infoBike;
 		this.valorAssegurado = valorAssegurado;
-		this.dataInicio = dataInicio;
-		this.dataFim = new Date((int) (getDataInicio().getYear() - 1.899), getDataInicio().getMonth() -1, getDataInicio().getDate());
+		this.dataInicio = new Date(new java.util.Date().getTime());
+		this.dataFim = new Date((int) (getDataInicio().getYear()) + 1, getDataInicio().getMonth(), getDataInicio().getDate());
 		this.cliente_id = cliente_id;
 	}
 	

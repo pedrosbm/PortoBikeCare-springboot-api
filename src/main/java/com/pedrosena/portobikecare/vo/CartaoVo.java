@@ -39,7 +39,7 @@ public class CartaoVo {
 		this.pagamentoId = pagamentoId;
 		this.numCartao = numCartao;
 		this.titular = titular;
-		this.dataVal = DateConv.stringToDate(dataVal);
+		this.dataVal = DateConv.minStringToDate(dataVal);
 		this.cvv = cvv;
 		this.modalidade = modalidade;
 		this.clienteId = clienteId;
