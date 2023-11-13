@@ -148,6 +148,8 @@ public class PlanoDao {
         }
         return id;
     }
+    
+    
     public String update(PlanoVo plano) {
         String sqlStatement = "UPDATE plano SET NOME = ?, VALOR = ?, COBERTURA = ?, APOLICE_ID = ? WHERE ID = ?";
 

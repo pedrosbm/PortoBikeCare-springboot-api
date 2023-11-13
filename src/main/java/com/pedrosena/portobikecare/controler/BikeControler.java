@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,17 +26,31 @@ public class BikeControler {
 		return ResponseEntity.ok("Bike cadastrada com sucesso");
 	}
 	
-	@GetMapping(path = "list/{id}")
+	@GetMapping(path = "/list/{id}")
 	public ResponseEntity<List<BikeVo>> listarBikes(@PathVariable int id){
 		List<BikeVo> list = bikeDao.selectByUser(id);
 		
 		return ResponseEntity.ok(list);
 	}
 	
-	@GetMapping(path = "/listAll")
-	public ResponseEntity<List<BikeVo>> listarTodas(){
-		List<BikeVo> list = bikeDao.selectAll();
+	@GetMapping(path = "/listOne/{id}")
+	public ResponseEntity<BikeVo> listarPorBike(@PathVariable int id){
+		BikeVo bike = bikeDao.selectById(id);
 		
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok(bike);
+	}
+	
+	@PutMapping(path = "/edit")
+	public ResponseEntity<String> editarBike(@RequestBody BikeVo bike){
+		bikeDao.update(bike);
+		
+		return ResponseEntity.ok("Bike editada com sucesso");
+	}
+	
+	@PostMapping(path = "/delete/{id}")
+	public ResponseEntity<String> apagarBike(@PathVariable int id){
+		bikeDao.delete(id);
+		
+		return ResponseEntity.ok("Bike apadaga");
 	}
 }

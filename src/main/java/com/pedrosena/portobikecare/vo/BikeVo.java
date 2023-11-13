@@ -41,7 +41,7 @@ public class BikeVo {
 	@JsonProperty("tipoPneu")
 	private String tipoPneu;
 	
-	@JsonProperty("observacoes")
+	@JsonProperty("observações")
 	private String observacoes;
 	
 	@JsonProperty("nf")
@@ -51,7 +51,7 @@ public class BikeVo {
 	private int cliente_id;
 
 	@JsonCreator
-	public BikeVo(@JsonProperty("nick") String nick,@JsonProperty("tipoQuadro") String tipoQuadro,@JsonProperty("quantMarcha") int quantMarcha,@JsonProperty("tipoSuspensao") String tipoSuspensao,@JsonProperty("tipoFreio") String tipoFreio,@JsonProperty("modalidade") String modalidade,@JsonProperty("marca") String marca,@JsonProperty("modelo") String modelo,@JsonProperty("valor") double valor,@JsonProperty("numSerie") String numSerie,@JsonProperty("tipoPneu") String tipoPneu,@JsonProperty("observacoes") String observacoes,@JsonProperty("nf") long nf,@JsonProperty("clienteId") int cliente_id) {
+	public BikeVo(@JsonProperty("nick") String nick,@JsonProperty("tipoQuadro") String tipoQuadro,@JsonProperty("quantMarcha") int quantMarcha,@JsonProperty("tipoSuspensao") String tipoSuspensao,@JsonProperty("tipoFreio") String tipoFreio,@JsonProperty("modalidade") String modalidade,@JsonProperty("marca") String marca,@JsonProperty("modelo") String modelo,@JsonProperty("valor") double valor,@JsonProperty("numSerie") String numSerie,@JsonProperty("tipoPneu") String tipoPneu,@JsonProperty("observações") String observacoes,@JsonProperty("nf") long nf,@JsonProperty("clienteId") int cliente_id) {
 		this.id = IdGen.bikeNewId();
 		this.nick = nick;
 		this.tipoQuadro = tipoQuadro;

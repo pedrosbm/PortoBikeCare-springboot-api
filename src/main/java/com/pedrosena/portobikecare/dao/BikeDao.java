@@ -14,7 +14,7 @@ public class BikeDao {
 	private Connection conn = DatabaseConnection.getConnection();
 
 	public String insert(BikeVo bike) {
-        String sqlStatement = "INSERT INTO bike (ID, NICK, TIPOQUADRO, QUANTMARCHA, TIPOSUSPENSAO, TIPOFREIO, MODALIDADE, MARCA, MODELO, VALOR, NUMSERIE, TIPOPNEU, OBSERVACOES, NF, CLIENTE_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlStatement = "INSERT INTO bike VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement statement = conn.prepareStatement(sqlStatement);
@@ -189,15 +189,15 @@ public class BikeDao {
 	
 	public int selectLast() {
 		String sqlStatement = "select id from bike order by id desc";
-		int id;
+		int id = 0;
 		
 		try {
 			PreparedStatement statement = conn.prepareStatement(sqlStatement);
 			ResultSet idData = statement.executeQuery();
 			
-			idData.next();
-			
-			id = idData.getInt("id");
+			if(idData.next()) {
+				id = idData.getInt("id");	
+			}
 			
 		} catch (SQLException e) {
 			System.err.println("Algo deu errado");
@@ -210,7 +210,7 @@ public class BikeDao {
 	}
 	
 	public String update(BikeVo b) {
-		String sqlStatement = "update bike set nick = ?, tipoquadro = ?, quantmarcha = ?, tiposuspensao = ?, tipofreio = ?, modalidade = ?, marca = ?, modelo = ?, valor = ?, numserie = ?, acessorio = ?, tipopneu = ?, obervacoes = ?, nf = ?, cliente_id = ? where bike_id = ?";
+		String sqlStatement = "update bike set nick = ?, tipoquadro = ?, quantmarcha = ?, tiposuspensao = ?, tipofreio = ?, modalidade = ?, marca = ?, modelo = ?, valor = ?, numserie = ?, tipopneu = ?, observacoes = ?, nf = ?, cliente_id = ? where id = ?";
 		
 		try {
 			PreparedStatement statement = conn.prepareStatement(sqlStatement);
@@ -225,11 +225,11 @@ public class BikeDao {
 			statement.setString(8, b.getModelo());
 			statement.setDouble(9, b.getValor());
 			statement.setString(10, b.getNumSerie());
-			statement.setString(12, b.getTipoPneu());
-			statement.setString(13, b.getObservacoes());
-			statement.setLong(14, b.getNf());
-			statement.setInt(15, b.getCliente_id());
-			statement.setInt(16, b.getId());
+			statement.setString(11, b.getTipoPneu());
+			statement.setString(12, b.getObservacoes());
+			statement.setLong(13, b.getNf());
+			statement.setInt(14, b.getCliente_id());
+			statement.setInt(15, b.getId());
 			statement.execute();
 			
 		} catch (SQLException e) {

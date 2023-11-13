@@ -24,7 +24,7 @@ public class PlanoVo {
 	private int apoliceId;
 	
 	@JsonCreator
-	public PlanoVo(@JsonProperty("nomePlano") String nome,@JsonProperty("valor") double valor,@JsonProperty("cobertura") List<String> cobertura, int apoliceId) {
+	public PlanoVo(@JsonProperty("nomePlano") String nome,@JsonProperty("valor") double valor,@JsonProperty("cobertura") List<String> cobertura,@JsonProperty("apoliceId") int apoliceId) {
 		this.id = IdGen.planoNewId();
 		this.nome = nome;
 		this.valor = valor;

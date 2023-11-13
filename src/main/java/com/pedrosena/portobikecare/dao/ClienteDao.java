@@ -12,15 +12,15 @@ public class ClienteDao {
 	
 	public int selectLast() {
 		String sqlStatement = "select id from cliente order by id desc";
-		int id;
+		int id = 0;
 		
 		try {
 			PreparedStatement statement = conn.prepareStatement(sqlStatement);
 			ResultSet idData = statement.executeQuery();
 			
-			idData.next();
-			
-			id = idData.getInt("id");
+			if(idData.next()) {
+				id = idData.getInt("id");	
+			}
 			
 		} catch (SQLException e) {
 			System.err.println("Algo deu errado");

@@ -14,24 +14,28 @@ public class CartaoDao {
     private Connection conn = DatabaseConnection.getConnection();
 
     public String insert(CartaoVo cartao) {
-        String sqlStatement = "INSERT INTO cartao VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sqlStatement = "INSERT INTO cartao (ID, NUM_CARTAO, TITULAR, DATA_VAL, CVV, MODALIDADE, PAGAMENTO_ID, CLIENTE_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement statement = conn.prepareStatement(sqlStatement);
             statement.setInt(1, cartao.getId());
-            statement.setDouble(1, cartao.getNumCartao());
-            statement.setString(2, cartao.getTitular());
-            statement.setDate(3, cartao.getDataVal());
-            statement.setInt(4, cartao.getCvv());
-            statement.setString(5, cartao.getModalidade());
-            statement.setLong(6, cartao.getPagamentoId());
+            statement.setLong(2, cartao.getNumCartao());
+            statement.setString(3, cartao.getTitular());
+            statement.setDate(4, cartao.getDataVal());
+            statement.setInt(5, cartao.getCvv());
+            statement.setString(6, cartao.getModalidade());
+            statement.setLong(7, cartao.getPagamentoId());
+            statement.setInt(8, cartao.getClienteId());
+
             statement.execute();
         } catch (SQLException e) {
             System.err.println("Algo deu errado");
             DatabaseConnection.closeConnection();
             e.printStackTrace();
+            return "Erro na inserção";
         }
-        return "Insert concluído";
+
+        return "Inserção concluída";
     }
 
     public String delete(int pagamentoId) {
@@ -94,6 +98,7 @@ public class CartaoDao {
             int cvv = cartaoData.getInt("CVV");
             String modalidade = cartaoData.getString("MODALIDADE");
             int cartaoPagamentoId = cartaoData.getInt("PAGAMENTO_ID");
+            int clienteId = cartaoData.getInt("CLIENTE_ID");
 
             cartao.setId(cId);
             cartao.setNumCartao(numCartao);
@@ -102,6 +107,7 @@ public class CartaoDao {
             cartao.setCvv(cvv);
             cartao.setModalidade(modalidade);
             cartao.setPagamentoId(cartaoPagamentoId);
+            cartao.setClienteId(clienteId);
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro.");
             DatabaseConnection.closeConnection();
@@ -158,7 +164,6 @@ public class CartaoDao {
 			e.printStackTrace();
 			id = 0;
 		}
-		
 		return id;
 	}
     
@@ -181,6 +186,4 @@ public class CartaoDao {
         }
         return "Update concluído";
     }
-
-    
 }

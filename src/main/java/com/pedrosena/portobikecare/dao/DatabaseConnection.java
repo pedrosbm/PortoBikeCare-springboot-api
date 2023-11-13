@@ -56,7 +56,7 @@ public class DatabaseConnection {
 	 */
 	public static String closeConnection() {
 		try {
-			conn.close();
+			conn.close();;
 		} catch (SQLException e) {
 			System.err.println("Conexão já foi fechada");
 			e.printStackTrace();

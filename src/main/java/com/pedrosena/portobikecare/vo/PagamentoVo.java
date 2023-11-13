@@ -6,7 +6,7 @@ import com.pedrosena.portobikecare.bo.IdGen;
 
 public class PagamentoVo {
 	
-	@JsonProperty("pagametoId")
+	@JsonProperty("pagamentoId")
 	private int id;
 
 	@JsonProperty("valor")

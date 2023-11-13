@@ -34,7 +34,7 @@ public class CartaoVo {
 	private int clienteId;
 	
 	@JsonCreator
-	public CartaoVo(@JsonProperty("pagamentoId")long pagamentoId,@JsonProperty("numCartao") long numCartao,@JsonProperty("titular") String titular,@JsonProperty("dataVal") String dataVal,@JsonProperty("cvv") int cvv,@JsonProperty("modalidade") String modalidade, int clienteId) {
+	public CartaoVo(@JsonProperty("pagamentoId")long pagamentoId,@JsonProperty("numCartao") long numCartao,@JsonProperty("titular") String titular,@JsonProperty("dataVal") String dataVal,@JsonProperty("cvv") int cvv,@JsonProperty("modalidade") String modalidade,@JsonProperty("clienteId") int clienteId) {
 		this.id = IdGen.cartaoNewId();
 		this.pagamentoId = pagamentoId;
 		this.numCartao = numCartao;
@@ -106,4 +106,13 @@ public class CartaoVo {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public int getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(int clienteId) {
+		this.clienteId = clienteId;
+	}	
+	
 }

@@ -113,7 +113,7 @@ public class ApoliceDao {
 		
 		public int selectLast() {
 			String sqlStatement = "select id from apolice order by id desc";
-			int id;
+			int id = 0;
 			
 			try {
 				PreparedStatement statement = conn.prepareStatement(sqlStatement);
@@ -121,8 +121,28 @@ public class ApoliceDao {
 				
 				if(idData.next()) {
 					id = idData.getInt("id");
-				} else {
-					id = 0;
+				}
+				
+			} catch (SQLException e) {
+				System.err.println("Algo deu errado");
+				DatabaseConnection.closeConnection();
+				e.printStackTrace();
+				id = 0;
+			}
+			return id;
+		}
+		
+		public int selectLast(int clienteId) {
+			String sqlStatement = "select id from apolice where cliente_id = ? order by id desc";
+			int id = 0;
+			
+			try {
+				PreparedStatement statement = conn.prepareStatement(sqlStatement);
+				statement.setInt(1, clienteId);
+				ResultSet idData = statement.executeQuery();
+				
+				if(idData.next()) {
+					id = idData.getInt("id");
 				}
 				
 			} catch (SQLException e) {
