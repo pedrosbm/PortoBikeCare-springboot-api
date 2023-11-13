@@ -60,4 +60,54 @@ public class ClienteDao {
 		
 		return c;
 	}
+	
+	public ClienteVo selectById(int clienteId) {
+		String sqlStatement = "select * from cliente where id = ?";
+		ClienteVo c = new ClienteVo();
+		
+		try {
+			PreparedStatement statement = conn.prepareStatement(sqlStatement);
+			statement.setInt(1, clienteId);
+			ResultSet clienteData = statement.executeQuery();
+			
+			if(clienteData.next()) {
+				int id = clienteData.getInt("ID");
+	            String nome = clienteData.getString("NOME");
+	            String cep = clienteData.getString("CEP");
+	            String cEmail = clienteData.getString("EMAIL");
+				
+	            c.setId(id);
+		        c.setNome(nome);
+		        c.setCep(cep);
+		        c.setEmail(cEmail);	
+			}
+		} catch (SQLException e) {
+			System.err.println("Algo deu errado");
+			e.printStackTrace();
+			DatabaseConnection.closeConnection();
+		}
+		
+		return c;
+	}
+	
+	   public String update(ClienteVo cliente) {
+	        String sqlStatement = "UPDATE cliente SET NOME = ?, CEP = ?, EMAIL = ? WHERE ID = ?";
+
+	        try {
+	            PreparedStatement statement = conn.prepareStatement(sqlStatement);
+	            statement.setString(1, cliente.getNome());
+	            statement.setString(2, cliente.getCep());
+	            statement.setString(3, cliente.getEmail());
+	            statement.setInt(4, cliente.getId());
+
+	            statement.execute();
+	        } catch (SQLException e) {
+	            System.err.println("Algo deu errado");
+	            DatabaseConnection.closeConnection();
+	            e.printStackTrace();
+	            return "Erro na atualização";
+	        }
+
+	        return "Atualização concluída";
+	    }
 }

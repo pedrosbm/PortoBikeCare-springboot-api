@@ -31,7 +31,7 @@ public class CartaoControler {
 		return ResponseEntity.ok(cartao);
 	}
 	
-	@GetMapping(path = "/List/{id}")
+	@GetMapping(path = "/list/{id}")
 	public ResponseEntity<List<CartaoVo>> listarCartoes(@PathVariable int id){
 		List<CartaoVo> cartoes = cDao.selectByCliente(id);
 		return ResponseEntity.ok(cartoes);

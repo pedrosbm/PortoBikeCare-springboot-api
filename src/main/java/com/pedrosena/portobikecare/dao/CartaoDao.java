@@ -82,32 +82,33 @@ public class CartaoDao {
     }
     
     public CartaoVo selectById(int pagamentoId) {
-        String sqlStatement = "SELECT * FROM cartao WHERE PAGAMENTO_ID = ?";
+        String sqlStatement = "SELECT * FROM cartao WHERE id = ?";
         CartaoVo cartao = new CartaoVo();
 
         try {
             PreparedStatement statement = conn.prepareStatement(sqlStatement);
             statement.setInt(1, pagamentoId);
             ResultSet cartaoData = statement.executeQuery();
-            cartaoData.next();
+            
+            if(cartaoData.next()) {
+            	int cId = cartaoData.getInt("ID");
+                long numCartao = cartaoData.getLong("NUM_CARTAO");
+                String titular = cartaoData.getString("TITULAR");
+                Date dataVal = cartaoData.getDate("DATA_VAL");
+                int cvv = cartaoData.getInt("CVV");
+                String modalidade = cartaoData.getString("MODALIDADE");
+                int cartaoPagamentoId = cartaoData.getInt("PAGAMENTO_ID");
+                int clienteId = cartaoData.getInt("CLIENTE_ID");
 
-            int cId = cartaoData.getInt("ID");
-            long numCartao = cartaoData.getLong("NUM_CARTAO");
-            String titular = cartaoData.getString("TITULAR");
-            Date dataVal = cartaoData.getDate("DATA_VAL");
-            int cvv = cartaoData.getInt("CVV");
-            String modalidade = cartaoData.getString("MODALIDADE");
-            int cartaoPagamentoId = cartaoData.getInt("PAGAMENTO_ID");
-            int clienteId = cartaoData.getInt("CLIENTE_ID");
-
-            cartao.setId(cId);
-            cartao.setNumCartao(numCartao);
-            cartao.setTitular(titular);
-            cartao.setDataVal(dataVal);
-            cartao.setCvv(cvv);
-            cartao.setModalidade(modalidade);
-            cartao.setPagamentoId(cartaoPagamentoId);
-            cartao.setClienteId(clienteId);
+                cartao.setId(cId);
+                cartao.setNumCartao(numCartao);
+                cartao.setTitular(titular);
+                cartao.setDataVal(dataVal);
+                cartao.setCvv(cvv);
+                cartao.setModalidade(modalidade);
+                cartao.setPagamentoId(cartaoPagamentoId);
+                cartao.setClienteId(clienteId);
+            }
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro.");
             DatabaseConnection.closeConnection();

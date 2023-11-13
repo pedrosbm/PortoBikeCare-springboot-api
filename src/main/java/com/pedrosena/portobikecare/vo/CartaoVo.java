@@ -35,6 +35,7 @@ public class CartaoVo {
 	
 	@JsonCreator
 	public CartaoVo(@JsonProperty("pagamentoId")long pagamentoId,@JsonProperty("numCartao") long numCartao,@JsonProperty("titular") String titular,@JsonProperty("dataVal") String dataVal,@JsonProperty("cvv") int cvv,@JsonProperty("modalidade") String modalidade,@JsonProperty("clienteId") int clienteId) {
+		System.out.println(dataVal);
 		this.id = IdGen.cartaoNewId();
 		this.pagamentoId = pagamentoId;
 		this.numCartao = numCartao;

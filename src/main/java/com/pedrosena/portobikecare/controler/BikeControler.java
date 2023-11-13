@@ -47,7 +47,7 @@ public class BikeControler {
 		return ResponseEntity.ok("Bike editada com sucesso");
 	}
 	
-	@PostMapping(path = "/delete/{id}")
+	@GetMapping(path = "/delete/{id}")
 	public ResponseEntity<String> apagarBike(@PathVariable int id){
 		bikeDao.delete(id);
 		
