@@ -21,8 +21,8 @@ public class PlanoControler {
 	private ApoliceDao aDao = new ApoliceDao();
 
 	@PostMapping(path = "/new/{id}")
-	public ResponseEntity<PlanoVo> novoPlano(@RequestBody PlanoVo plano, @PathVariable("id") int clienteId){
-		int id = aDao.selectLast(clienteId);
+	public ResponseEntity<PlanoVo> novoPlano(@RequestBody PlanoVo plano, @PathVariable("id") int apoliceId){
+		int id = aDao.selectLast(apoliceId);
 		plano.setApoliceId(id);
 		pDao.insert(plano);
 		
